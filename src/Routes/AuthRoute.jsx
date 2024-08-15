@@ -4,7 +4,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import {  useLocation, useNavigate } from "react-router-dom";
 
 
-const AuthRoute = (children) => {
+const AuthRoute = ({children}) => {
     const {loading,user} = useContext(AuthContext)
     const link = useLocation()
     const navigate = useNavigate()

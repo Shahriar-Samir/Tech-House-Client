@@ -22,6 +22,7 @@ useEffect(()=>{
             setLoading(false)
         }
         else{
+            axiosSecure.post('/removeToken')
             setUser(null)
             setLoading(false)
         }
@@ -44,7 +45,7 @@ useEffect(()=>{
         return signOut(auth)
     }
 
-    const userAuth = {signIn,signUp,loading,setLoading,user,googleSignIn}
+    const userAuth = {signIn,signUp,loading,setLoading,user,googleSignIn,logOut}
     return <AuthContext.Provider value={userAuth}>
         {children}
     </AuthContext.Provider>

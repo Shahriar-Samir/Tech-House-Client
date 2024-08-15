@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
@@ -7,9 +7,11 @@ import Login from './Pages/Login.jsx'
 import Error from './Pages/Error.jsx'
 import Signup from './Pages/Signup.jsx'
 import Home from './Pages/Home.jsx'
-import AuthProvider from './Providers/AuthProvider.jsx'
 import PrivateRoute from './Routes/PrivateRoute.jsx'
 import AuthRoute from './Routes/AuthRoute.jsx'
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {HelmetProvider} from 'react-helmet-async'
+import AuthProvider from './Providers/AuthProvider.jsx'
 
 const router = createBrowserRouter([{
       path:'/',
@@ -32,8 +34,14 @@ const router = createBrowserRouter([{
 
 }])
 
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')).render(
-    <AuthProvider>
-      <RouterProvider router={router}/>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+            <AuthProvider>
+            <RouterProvider router={router}/>
+            </AuthProvider>
+        </HelmetProvider>
+    </QueryClientProvider>
 )

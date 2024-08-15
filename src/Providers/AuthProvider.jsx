@@ -18,13 +18,17 @@ useEffect(()=>{
         if(currentUser){
             const {email,uid} = currentUser
             axiosSecure.post('/token', {uid,email})
-            setUser(currentUser)
-            setLoading(false)
+            .then(()=>{
+                setUser(currentUser)
+                setLoading(false)
+            })
         }
         else{
             axiosSecure.post('/removeToken')
-            setUser(null)
-            setLoading(false)
+            .then(()=>{
+                setUser(null)
+                setLoading(false)
+            })
         }
     })
     },[])

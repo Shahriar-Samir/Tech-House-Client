@@ -18,12 +18,12 @@ useEffect(()=>{
     })
     },[])
 
-    const login = (email,pass)=>{
+    const signIn = (email,pass)=>{
         setLoading(true)
         return signInWithEmailAndPassword(auth,email,pass)
     }
 
-    const userAuth = {login,loading,setLoading,user}
+    const userAuth = {signIn,loading,setLoading,user}
     return <AuthContext.Provider value={userAuth}>
         {children}
     </AuthContext.Provider>

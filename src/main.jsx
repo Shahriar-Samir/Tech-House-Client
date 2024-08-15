@@ -7,6 +7,7 @@ import Login from './Pages/Login.jsx'
 import Error from './Pages/Error.jsx'
 import Signup from './Pages/Signup.jsx'
 import Home from './Pages/Home.jsx'
+import AuthProvider from './Providers/AuthProvider.jsx'
 
 const router = createBrowserRouter([{
       path:'/',
@@ -30,5 +31,7 @@ const router = createBrowserRouter([{
 }])
 
 createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider>
 )

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 
 const Login = () => {
-    const {signIn} = useContext(AuthContext)
+    const {signIn,googleSignIn} = useContext(AuthContext)
 
     const submitHandler = (e)=>{
             e.preventDefault()
@@ -15,12 +15,19 @@ const Login = () => {
             })
             
     }
+    const googleSigninHandler = ()=>{
+        googleSignIn()
+        .then(res=>{
+            console.log(res)
+        })
+    }
 
     return (
         <div className='w-full h-[100vh] flex justify-center items-center'>
              <div className='w-11/12 max-w-[400px]'>
                 <h1 className='text-center font-semibold text-3xl'>Login</h1>
              <form className="card-body" onSubmit={submitHandler}>
+                <h1 className='text-center font-semibold text-3xl' onClick={googleSigninHandler}>Google</h1>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>

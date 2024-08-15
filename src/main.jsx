@@ -8,6 +8,7 @@ import Error from './Pages/Error.jsx'
 import Signup from './Pages/Signup.jsx'
 import Home from './Pages/Home.jsx'
 import AuthProvider from './Providers/AuthProvider.jsx'
+import PrivateRoute from './Routes/PrivateRoute.jsx'
 
 const router = createBrowserRouter([{
       path:'/',
@@ -24,7 +25,7 @@ const router = createBrowserRouter([{
         },
         {
           path:'/',
-          element:<Home/>
+          element:<PrivateRoute><Home/></PrivateRoute>
         },
       ]
 

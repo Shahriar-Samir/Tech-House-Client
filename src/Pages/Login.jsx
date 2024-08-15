@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const {signIn,googleSignIn} = useContext(AuthContext)
+    const {signIn,googleSignIn,setLoading} = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const submitHandler = (e)=>{
             e.preventDefault()
@@ -11,14 +13,15 @@ const Login = () => {
             const password = form.password.value
             signIn(email,password)
             .then(res=>{
-                console.log(res)
+                setLoading(false)
+                navigate('/')
             })
             
     }
     const googleSigninHandler = ()=>{
         googleSignIn()
         .then(res=>{
-            console.log(res)
+          setLoading(false)
         })
     }
 

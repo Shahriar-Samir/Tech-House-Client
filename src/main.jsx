@@ -9,6 +9,7 @@ import Signup from './Pages/Signup.jsx'
 import Home from './Pages/Home.jsx'
 import AuthProvider from './Providers/AuthProvider.jsx'
 import PrivateRoute from './Routes/PrivateRoute.jsx'
+import AuthRoute from './Routes/AuthRoute.jsx'
 
 const router = createBrowserRouter([{
       path:'/',
@@ -17,11 +18,11 @@ const router = createBrowserRouter([{
       children:[
         {
           path:'/login',
-          element:<Login/>
+          element:<AuthRoute><Login/></AuthRoute>
         },
         {
           path:'/signup',
-          element:<Signup/>
+          element:<AuthRoute><Signup/></AuthRoute>
         },
         {
           path:'/',

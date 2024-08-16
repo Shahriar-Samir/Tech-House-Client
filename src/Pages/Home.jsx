@@ -12,7 +12,7 @@ const Home = () => {
         logOut()
     }
 
-    const {data:items,isLoading} = useQuery({
+    const {data:items,isFetching:loading1} = useQuery({
             queryKey: ['products'],
             initialData: [],
             queryFn: ()=>
@@ -21,12 +21,29 @@ const Home = () => {
                     return res.data
                 })
     })
+    const {data:itemsCount,isFetching:loading2} = useQuery({
+            queryKey: ['itemsCount'],
+            initialData: {},
+            queryFn: ()=>
+                axiosSecure.get('/itemsCount')
+                .then(res=>{
+                    return res.data
+                })
+    })
 
-   
 
-    if(isLoading){
+    const itemsPerPage = 5
+    const totalItems= itemsCount.count
+
+
+
+    if(loading1 || loading2){
         return <Loading/>
     }
+
+    const totalPagesCount = Math.ceil(totalItems/itemsPerPage)
+    const totalPages = [...Array(totalPagesCount).keys()]
+    
 
     return (
         <div>
@@ -54,15 +71,12 @@ const Home = () => {
             </div>
             <div className="join">
                 <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" />
-  <input
-    className="join-item btn btn-square"
-    type="radio"
-    name="options"
-    aria-label="1"
-    defaultChecked />
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                {
+                    totalPages.map(btn=>{
+                        const btnIndex = btn+1
+                        return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} />
+                    })
+                }
   <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" />
 </div>
            </div>

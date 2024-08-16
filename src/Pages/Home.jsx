@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
@@ -12,11 +12,14 @@ const Home = () => {
         logOut()
     }
 
+    const itemsPerPage = 5
+    const [currentPage,setCurrentPage] = useState(0)
+
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: ['products'],
+            queryKey: [currentPage],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get('/products')
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}`)
                 .then(res=>{
                     return res.data
                 })
@@ -32,18 +35,23 @@ const Home = () => {
     })
 
 
-    const itemsPerPage = 5
-    const totalItems= itemsCount.count
-
-
-
     if(loading1 || loading2){
         return <Loading/>
     }
-
+    const totalItems= itemsCount.count
     const totalPagesCount = Math.ceil(totalItems/itemsPerPage)
     const totalPages = [...Array(totalPagesCount).keys()]
     
+    const nextPage = ()=>{
+        setCurrentPage(currentPage+1)
+}
+    const prePage = ()=>{
+        setCurrentPage(currentPage-1)
+}
+    const selectPage = (page)=>{
+        setCurrentPage(page)
+}
+
 
     return (
         <div>
@@ -70,14 +78,17 @@ const Home = () => {
                 })}
             </div>
             <div className="join">
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} />
                 {
                     totalPages.map(btn=>{
                         const btnIndex = btn+1
-                        return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} />
+                        if(currentPage === btn){
+                            return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} checked/>
+                        }
+                        return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} onClick={()=> selectPage(btn)}/>
                     })
                 }
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" />
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" onClick={nextPage}/>
 </div>
            </div>
         </div>

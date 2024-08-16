@@ -4,10 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Loading from '../Components/Loading';
 import Products from './Products';
+import { ToastContainer } from 'react-toastify';
 
 
 const Home = () => {
-    const {logOut} = useContext(AuthContext)
+
     const axiosSecure = useAxiosSecure()
 
     const [brands,setBrands] = useState([])
@@ -66,9 +67,7 @@ const Home = () => {
     }
     
     
-    const logout = ()=>{
-        logOut()
-    }
+  
     
     const itemsPerPage = 6
     const [currentPage,setCurrentPage] = useState(0)
@@ -96,9 +95,8 @@ const Home = () => {
        
 
     return (
-        <div>
-            home
-            <button onClick={logout}>logout</button>
+        <div className='mt-10'>
+           <ToastContainer/>
          <div className='flex gap-5 w-full mx-auto px-4'>
          <div className='w-4/12 max-w-[500px] bg-white flex flex-col items-center mx-auto gap-5 '>
          <div className="collapse bg-base-200 w-full">

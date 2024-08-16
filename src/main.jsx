@@ -13,6 +13,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {HelmetProvider} from 'react-helmet-async'
 import AuthProvider from './Providers/AuthProvider.jsx'
 import Search from './Pages/Search.jsx'
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([{
       path:'/',

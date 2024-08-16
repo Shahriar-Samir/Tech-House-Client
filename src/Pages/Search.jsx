@@ -10,7 +10,7 @@ const Search = () => {
     const {value} = useParams()
 
 
-    const itemsPerPage = 5
+    const itemsPerPage = 6
     const [currentPage,setCurrentPage] = useState(0)
 
     const {data:items,isFetching:loading1} = useQuery({

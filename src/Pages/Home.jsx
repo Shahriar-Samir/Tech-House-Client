@@ -3,23 +3,45 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Loading from '../Components/Loading';
+import Products from './Products';
+
 
 const Home = () => {
     const {logOut} = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
 
+    const [brands,setBrands] = useState([])
+
+    const brandsHandler = (e)=>{
+        if(e.target.checked){
+            setBrands(oldData=>{
+                return [...oldData,e.target.name]
+            })
+        }
+        else{
+            setBrands(oldData=>{
+                const newData = oldData.filter(item=>{
+                    return item !== e.target.name
+                })
+                return [...newData]
+            })
+        }
+       
+    }
+    
+    
     const logout = ()=>{
         logOut()
     }
-
-    const itemsPerPage = 5
+    
+    const itemsPerPage = 6
     const [currentPage,setCurrentPage] = useState(0)
 
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: [currentPage],
+            queryKey: [currentPage,brands],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}`)
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}`)
                 .then(res=>{
                     return res.data
                 })
@@ -35,62 +57,51 @@ const Home = () => {
     })
 
 
-    if(loading1 || loading2){
-        return <Loading/>
-    }
-    const totalItems= itemsCount.count
-    const totalPagesCount = Math.ceil(totalItems/itemsPerPage)
-    const totalPages = [...Array(totalPagesCount).keys()]
-    
-    const nextPage = ()=>{
-        setCurrentPage(currentPage+1)
-}
-    const prePage = ()=>{
-        setCurrentPage(currentPage-1)
-}
-    const selectPage = (page)=>{
-        setCurrentPage(page)
-}
-
+ 
+  
+       
 
     return (
         <div>
             home
             <button onClick={logout}>logout</button>
-           <div className='w-8/12 px-3 mx-auto flex items-center flex-col gap-16'>
-           <div className='mt-5 grid grid-cols-3 gap-5 '>
-                {items.map(item=>{
-                    return <div key={item._id} className="card bg-base-100 shadow-xl">
-                    <figure>
-                      <img
-                        src={item.image}
-                        alt="Shoes" />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{item.name}</h2>
-                      <p>{item.brand}</p>
-                      <p>{item.category}</p>
-                      <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                      </div>
-                    </div>
-                  </div>
-                })}
-            </div>
-       <div className="join">
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />
-                {
-                    totalPages.map(btn=>{
-                        const btnIndex = btn+1
-                        if(currentPage === btn){
-                            return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} checked/>
-                        }
-                        return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} onClick={()=> selectPage(btn)}/>
-                    })
-                }
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" onClick={nextPage} disabled={currentPage===(totalPagesCount-1)? true: false} />
+         <div className='flex gap-5 w-full mx-auto px-4'>
+         <div className='w-4/12 max-w-[500px] bg-white flex flex-col items-center mx-auto gap-5 '>
+         <div className="collapse bg-base-200 w-full">
+  <input type="checkbox" />
+  <div className="collapse-title text-md font-medium">Brand</div>
+  <div className="collapse-content">
+
+    {[1,2,3,4,5].map(item=>{
+        return <div key={item} className="form-control">
+        <label className="label cursor-pointer">
+          <span className="label-text">{item}</span>
+<input type="checkbox" name={item} onClick={brandsHandler}   className="checkbox" /> 
+          
+        </label>
+      </div>
+    })}
+
+  </div>
 </div>
-           </div>
+         <div className="collapse bg-base-200 w-full">
+  <input type="checkbox" />
+  <div className="collapse-title text-md font-medium">Price range</div>
+  <div className="collapse-content">
+    <p>hello</p>
+  </div>
+</div>
+         <div className="collapse bg-base-200 w-full">
+         <input type="checkbox" />
+  <div className="collapse-title text-md font-medium">Price range</div>
+  <div className="collapse-content">
+    <p>hello</p>
+  </div>
+</div>
+        </div>
+         {loading1 || loading2? <Loading/> : <Products itemsCount={itemsCount} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} items={items}></Products>
+         }
+         </div>
         </div>
     );
 };

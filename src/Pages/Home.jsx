@@ -12,6 +12,18 @@ const Home = () => {
 
     const [brands,setBrands] = useState([])
     const [categories,setCategories] = useState([])
+    const [sortByDate,setSortByDate] = useState('default')
+    const [sortByPrice,setSortByPrice] = useState('default')
+
+
+    const handleSortByDate = (e)=>{
+        setSortByDate(e.target.value)
+    }
+    const handleSortByPrice = (e)=>{
+            setSortByPrice(e.target.value)
+    }
+
+    console.log(sortByDate, sortByPrice)
 
     const allBrands = ["Apple","Dell","Logitech","Samsung","Sony","Corsair","NZXT","Blue Microphones","Herman Miller","Brother","ASUS","Bose","LG","Amazon","Canon","Microsoft","Fitbit","JBL","NVIDIA","Google","MSI","HyperX","SteelSeries","Noctua","Razer","Intel","AMD","Gigabyte"
       ]
@@ -62,10 +74,10 @@ const Home = () => {
     const [currentPage,setCurrentPage] = useState(0)
 
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: [currentPage,brands,categories],
+            queryKey: [currentPage,brands,categories,sortByDate,sortByPrice],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}`)
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&sortByPrice=${sortByPrice}&sortByDate=${sortByDate}`)
                 .then(res=>{
                     return res.data
                 })
@@ -134,22 +146,22 @@ const Home = () => {
   </div>
 </div>
         </div>
-        <div>
-            <div className='flex gap-4'>
+        <div className='w-full'>
+            <div className='flex gap-4 w-full'>
                <label>
                 Sort By Price:
-               <select className='bg-slate-200 rounded-lg p-2'>
-                    <option>Default</option>
-                    <option>Price {'(Low > High)'}</option>
-                    <option>Default {'High > Low'}</option>
+               <select name='sortByPrice' onChange={handleSortByPrice} className='bg-slate-200 rounded-lg p-2'>
+                    <option value='default'>Default</option>
+                    <option value='low'>Price {'(Low > High)'}</option>
+                    <option value='high'>Price {'High > Low'}</option>
                 </select>
                </label>
                 <label>
                 Sort By Date:
-                <select className='bg-slate-200 rounded-lg p-2'>
-                    <option>Default</option>
-                    <option>Newest</option>
-                    <option>Oldest</option>
+                <select name='sortByDate' onChange={handleSortByDate} className='bg-slate-200 rounded-lg p-2'>
+                    <option value='default'>Default</option>
+                    <option value='newest'>Newest</option>
+                    <option value='oldest'>Oldest</option>
                 </select>
                 </label>
             </div>

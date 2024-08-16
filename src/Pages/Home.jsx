@@ -12,6 +12,9 @@ const Home = () => {
 
     const [brands,setBrands] = useState([])
 
+    const allBrands = ["Apple","Dell","Logitech","Samsung","Sony","Corsair","NZXT","Blue Microphones","Herman Miller","Brother","ASUS","Bose","LG","Amazon","Canon","Microsoft","Fitbit","JBL","NVIDIA","Google","MSI","HyperX","SteelSeries","Noctua","Razer","Intel","AMD","Gigabyte"
+      ]
+
     const brandsHandler = (e)=>{
         if(e.target.checked){
             setBrands(oldData=>{
@@ -72,7 +75,7 @@ const Home = () => {
   <div className="collapse-title text-md font-medium">Brand</div>
   <div className="collapse-content">
 
-    {[1,2,3,4,5].map(item=>{
+    {allBrands.map(item=>{
         return <div key={item} className="form-control">
         <label className="label cursor-pointer">
           <span className="label-text">{item}</span>

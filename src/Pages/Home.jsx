@@ -80,8 +80,6 @@ const Home = () => {
                 })
     })
 
-
-    console.log(itemsCount)
   
        
 
@@ -127,12 +125,38 @@ const Home = () => {
          <input type="checkbox" />
   <div className="collapse-title text-md font-medium">Price range</div>
   <div className="collapse-content">
-    <p>hello</p>
+  <input type="range" min={0} max="100" onChange={(e)=> console.log(e.target.value)} defaultValue={30} className="range" />
+  <div className='flex justify-between w-full'>
+        <h1>0</h1>
+
+        <h1>12</h1>
+  </div>
   </div>
 </div>
         </div>
-         {loading1 || loading2? <Loading/> : <Products itemsCount={itemsCount} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} items={items}></Products>
+        <div>
+            <div className='flex gap-4'>
+               <label>
+                Sort By Price:
+               <select className='bg-slate-200 rounded-lg p-2'>
+                    <option>Default</option>
+                    <option>Price {'(Low > High)'}</option>
+                    <option>Default {'High > Low'}</option>
+                </select>
+               </label>
+                <label>
+                Sort By Date:
+                <select className='bg-slate-200 rounded-lg p-2'>
+                    <option>Default</option>
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                </select>
+                </label>
+            </div>
+        {loading1 || loading2? <Loading/> : <Products itemsCount={itemsCount} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} items={items}></Products>
          }
+        </div>
+
          </div>
         </div>
     );

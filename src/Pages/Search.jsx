@@ -26,12 +26,12 @@ const Search = () => {
             queryKey: ['itemsCount'],
             initialData: {},
             queryFn: ()=>
-                axiosSecure.get('/itemsCount')
+                axiosSecure.get(`/searchCount?value=${value}`)
                 .then(res=>{
                     return res.data
                 })
     })
-
+    console.log(itemsCount)
 
     if(loading1 || loading2){
         return <Loading/>
@@ -74,7 +74,7 @@ const Search = () => {
                 })}
             </div>
             <div className="join">
-                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} />
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />
                 {
                     totalPages.map(btn=>{
                         const btnIndex = btn+1
@@ -84,7 +84,7 @@ const Search = () => {
                         return <input key={btn} className="join-item btn btn-square" type="radio" name="options" aria-label={btnIndex} onClick={()=> selectPage(btn)}/>
                     })
                 }
-  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" onClick={nextPage}/>
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" onClick={nextPage} disabled={currentPage===(totalPagesCount-1)? true: false} />
 </div>
            </div>
         </div>

@@ -13,7 +13,6 @@ const Login = () => {
             const password = form.password.value
             signIn(email,password)
             .then(res=>{
-                setLoading(false)
                 navigate('/')
             })
             
@@ -21,7 +20,6 @@ const Login = () => {
     const googleSigninHandler = ()=>{
         googleSignIn()
         .then(res=>{
-          setLoading(false)
         })
     }
 

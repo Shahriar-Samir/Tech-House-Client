@@ -32,9 +32,22 @@ const Home = () => {
         <div>
             home
             <button onClick={logout}>logout</button>
-            <div className='mt-5'>
+            <div className='mt-5 grid grid-cols-3 mx-auto gap-5 w-full px-3'>
                 {items.map(item=>{
-                    return <p key={item}>{item}</p>
+                    return <div key={item._id} className="card bg-base-100 shadow-xl">
+                    <figure>
+                      <img
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                        alt="Shoes" />
+                    </figure>
+                    <div className="card-body">
+                      <h2 className="card-title">{item.name}</h2>
+                      <p>{item.brand}</p>
+                      <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                      </div>
+                    </div>
+                  </div>
                 })}
             </div>
         </div>

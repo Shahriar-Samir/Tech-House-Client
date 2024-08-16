@@ -11,9 +11,14 @@ const Home = () => {
     const axiosSecure = useAxiosSecure()
 
     const [brands,setBrands] = useState([])
+    const [categories,setCategories] = useState([])
 
     const allBrands = ["Apple","Dell","Logitech","Samsung","Sony","Corsair","NZXT","Blue Microphones","Herman Miller","Brother","ASUS","Bose","LG","Amazon","Canon","Microsoft","Fitbit","JBL","NVIDIA","Google","MSI","HyperX","SteelSeries","Noctua","Razer","Intel","AMD","Gigabyte"
       ]
+    const allCategories = ["Laptops","Audio","Smart Home", "Accessories","PC Components",
+        "Home Entertainment","Monitors","Tablets","Office Accessories","Cameras",
+      ]
+      
 
     const brandsHandler = (e)=>{
         if(e.target.checked){
@@ -23,6 +28,22 @@ const Home = () => {
         }
         else{
             setBrands(oldData=>{
+                const newData = oldData.filter(item=>{
+                    return item !== e.target.name
+                })
+                return [...newData]
+            })
+        }
+       
+    }
+    const categoriesHandler = (e)=>{
+        if(e.target.checked){
+            setCategories(oldData=>{
+                return [...oldData,e.target.name]
+            })
+        }
+        else{
+            setCategories(oldData=>{
                 const newData = oldData.filter(item=>{
                     return item !== e.target.name
                 })
@@ -41,10 +62,10 @@ const Home = () => {
     const [currentPage,setCurrentPage] = useState(0)
 
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: [currentPage,brands],
+            queryKey: [currentPage,brands,categories],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}`)
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}`)
                 .then(res=>{
                     return res.data
                 })
@@ -89,9 +110,17 @@ const Home = () => {
 </div>
          <div className="collapse bg-base-200 w-full">
   <input type="checkbox" />
-  <div className="collapse-title text-md font-medium">Price range</div>
+  <div className="collapse-title text-md font-medium">Categories</div>
   <div className="collapse-content">
-    <p>hello</p>
+  {allCategories.map(item=>{
+        return <div key={item} className="form-control">
+        <label className="label cursor-pointer">
+          <span className="label-text">{item}</span>
+<input type="checkbox" name={item} onClick={categoriesHandler}   className="checkbox" /> 
+          
+        </label>
+      </div>
+    })}
   </div>
 </div>
          <div className="collapse bg-base-200 w-full">

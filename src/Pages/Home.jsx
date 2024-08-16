@@ -32,17 +32,19 @@ const Home = () => {
         <div>
             home
             <button onClick={logout}>logout</button>
-            <div className='mt-5 grid grid-cols-3 mx-auto gap-5 w-full px-3'>
+           <div className='w-8/12 px-3 mx-auto flex items-center flex-col gap-16'>
+           <div className='mt-5 grid grid-cols-3 gap-5 '>
                 {items.map(item=>{
                     return <div key={item._id} className="card bg-base-100 shadow-xl">
                     <figure>
                       <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                        src={item.image}
                         alt="Shoes" />
                     </figure>
                     <div className="card-body">
                       <h2 className="card-title">{item.name}</h2>
                       <p>{item.brand}</p>
+                      <p>{item.category}</p>
                       <div className="card-actions justify-end">
                         <button className="btn btn-primary">Buy Now</button>
                       </div>
@@ -50,6 +52,20 @@ const Home = () => {
                   </div>
                 })}
             </div>
+            <div className="join">
+                <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" />
+  <input
+    className="join-item btn btn-square"
+    type="radio"
+    name="options"
+    aria-label="1"
+    defaultChecked />
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+  <input className="join-item btn btn-square" type="radio" name="options" aria-label="Next" />
+</div>
+           </div>
         </div>
     );
 };

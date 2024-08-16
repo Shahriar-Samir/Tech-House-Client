@@ -71,17 +71,17 @@ const Home = () => {
                 })
     })
     const {data:itemsCount,isFetching:loading2} = useQuery({
-            queryKey: ['itemsCount'],
+            queryKey: [brands,categories],
             initialData: {},
             queryFn: ()=>
-                axiosSecure.get('/itemsCount')
+                axiosSecure.get(`/itemsCount?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}`)
                 .then(res=>{
                     return res.data
                 })
     })
 
 
- 
+    console.log(itemsCount)
   
        
 

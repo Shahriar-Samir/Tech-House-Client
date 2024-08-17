@@ -28,11 +28,15 @@ const Header = () => {
   }
 
     return (
-        <div className="navbar flex w-full justify-between py-4 bg-green-400">
-  <div className="w-full">
-    <a className="text-3xl font-bold flex gap-3 items-center ms-5 text-white">Tech House <img src="/tech.png" className="w-[50px] object-cover"/></a>
-  </div>
-  <div className="flex gap-5 w-full justify-end">
+        <div className="navbar flex w-full flex-col items-center md:flex-row justify-between py-4 bg-green-400 gap-5">
+    <div className="text-3xl font-bold flex gap-3 justify-center text-white text-center w-full ms-5 ">
+    <h1>
+    Tech House 
+    </h1>
+    <img src="/tech.png" className="w-[50px] object-cover"/>
+    </div>
+
+  <div className="flex gap-5 w-full justify-center flex-col md:flex-row items-center md:justify-end">
   <label className="input input-bordered bg-transparent !border-gray-100 !outline-none text-white flex items-center gap-2 w-full max-w-[500px]">
   <input type="text" className="grow placeholder:text-gray-100" placeholder="Search products" onKeyDown={search}/>
   <svg

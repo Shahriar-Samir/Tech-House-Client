@@ -7,6 +7,7 @@ import Products from './Products';
 import { ToastContainer } from 'react-toastify';
 
 import { SearchContext } from '../Providers/SearchProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 const Home = () => {
@@ -109,6 +110,9 @@ const Home = () => {
 
     return (
         <div className='mt-10'>
+            <Helmet>
+                <title>Tech House || Home</title>
+            </Helmet>
            <ToastContainer/>
          <div className='flex flex-col md:flex-row gap-5 mx-auto w-10/12'>
         <div className='w-full md:w-4/12 md:max-w-[500px]'>

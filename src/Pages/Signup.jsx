@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Signup = () => {
     const {signUp,googleSignIn} = useContext(AuthContext)
@@ -26,6 +27,9 @@ const Signup = () => {
 
     return (
         <div className='w-full h-[100vh] flex justify-center items-center flex-col bg-green-300'>
+             <Helmet>
+                <title>Tech House || Signup</title>
+            </Helmet>
            <div className='flex items-center gap-4'>
           <h1 className='text-3xl font-bold'>
     Tech House 
@@ -50,7 +54,7 @@ const Signup = () => {
         </div>
         <div className="form-control mt-2">
         <button className="btn bg-[#4ADE80] hover:bg-[#309756] text-white border-0">Create Account</button>
-        <h1 className=' mt-3 text-center'>Already have an account? <Link to='/signup' className='underline'>Login</Link></h1>
+        <h1 className=' mt-3 text-center'>Already have an account? <Link to='/login' className='underline'>Login</Link></h1>
         </div>
       </form>
              </div>

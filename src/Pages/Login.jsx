@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const {signIn,googleSignIn,setLoading} = useContext(AuthContext)
@@ -26,6 +27,9 @@ const Login = () => {
 
     return (
         <div className='w-full h-[100vh] flex justify-center items-center flex-col bg-green-300'>
+             <Helmet>
+                <title>Tech House || Login</title>
+            </Helmet>
           <div className='flex items-center gap-4'>
           <h1 className='text-3xl font-bold'>
     Tech House 

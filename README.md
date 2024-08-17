@@ -7,3 +7,4 @@ Features of this website
 - Users can filter items according to price range, brands, categories.
 - Users can sort items by price and creation date.
 - Users can search product items according to their names. After writing what you need search in search bar hit enter. It will show results.
+  - For log in password has to be at least 6 chars'

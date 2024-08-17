@@ -16,7 +16,7 @@ const Products = ({itemsCount,itemsPerPage,setCurrentPage,currentPage,items}) =>
 }
     return (
         <div className='w-full mx-auto flex items-center flex-col gap-16'>
-        <div className='mt-5 grid grid-cols-3 gap-5 '>
+        <div className='mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5 '>
              {items.map(item=>{
                  return <div key={item._id} className="card bg-base-100 shadow-xl">
                  <figure>
@@ -39,7 +39,7 @@ const Products = ({itemsCount,itemsPerPage,setCurrentPage,currentPage,items}) =>
     
              }
          </div>
-    <div className="join">
+    <div className="join flex justify-center flex-wrap">
              <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />
              {
                  totalPages.map(btn=>{

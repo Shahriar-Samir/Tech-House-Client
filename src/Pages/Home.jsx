@@ -110,9 +110,11 @@ const Home = () => {
     return (
         <div className='mt-10'>
            <ToastContainer/>
-         <div className='flex gap-5 w-full mx-auto px-4'>
-         <div className='w-4/12 max-w-[500px] bg-white flex flex-col items-center mx-auto gap-5 '>
-         <div className="collapse bg-base-200 w-full">
+         <div className='flex flex-col md:flex-row gap-5 mx-auto w-10/12'>
+        <div className='w-full md:w-4/12 md:max-w-[500px]'>
+            <h1 className='text-center font-semibold'>Filters</h1>
+        <div className='w-full  bg-white flex flex-col items-center mx-auto gap-5 '>
+         <div className="collapse bg-base-200 w-full ">
   <input type="checkbox" />
   <div className="collapse-title text-md font-medium">Brand</div>
   <div className="collapse-content">
@@ -157,19 +159,20 @@ const Home = () => {
   </div>
 </div>
         </div>
+        </div>
         <div className='w-full'>
-            <div className='flex gap-4 w-full'>
-               <label>
+            <div className='flex flex-col md:flex-row gap-4 w-full'>
+               <label className='flex flex-col '>
                 Sort By Price:
-               <select name='sortByPrice' onChange={handleSortByPrice} className='bg-slate-200 rounded-lg p-2'>
+               <select name='sortByPrice' onChange={handleSortByPrice} className='bg-[#F2F2F2] rounded-lg p-2 w-full md:max-w-[250px]'>
                     <option value='default'>Default</option>
                     <option value='low'>Price {'(Low > High)'}</option>
                     <option value='high'>Price {'High > Low'}</option>
                 </select>
                </label>
-                <label>
+                <label className='flex flex-col'>
                 Sort By Date:
-                <select name='sortByDate' onChange={handleSortByDate} className='bg-slate-200 rounded-lg p-2'>
+                <select name='sortByDate' onChange={handleSortByDate} className='bg-[#F2F2F2] rounded-lg p-2 w-full md:max-w-[250px]'>
                     <option value='default'>Default</option>
                     <option value='latest'>Newest</option>
                     <option value='oldest'>Oldest</option>

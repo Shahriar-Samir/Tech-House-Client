@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Components/Header';
 import SearchProvider from './Providers/SearchProvider';
+import Footer from './Components/Footer';
 
 
 
@@ -12,6 +13,7 @@ const App = () => {
           <div>
           <Header/>
           <Outlet/>
+          <Footer/>
         </div>
         </SearchProvider>
       );

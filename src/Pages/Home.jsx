@@ -116,7 +116,10 @@ const Home = () => {
         <div className='w-full  bg-white flex flex-col items-center mx-auto gap-5 '>
          <div className="collapse bg-base-200 w-full ">
   <input type="checkbox" />
-  <div className="collapse-title text-md font-medium">Brand</div>
+  <div className="collapse-title text-md font-medium">Brand
+  <hr className='w-full border-black'></hr>
+  </div>
+
   <div className="collapse-content">
 
     {allBrands.map(item=>{
@@ -133,7 +136,9 @@ const Home = () => {
 </div>
          <div className="collapse bg-base-200 w-full">
   <input type="checkbox" />
-  <div className="collapse-title text-md font-medium">Categories</div>
+  <div className="collapse-title text-md font-medium ">Categories
+    <hr className='w-full border-black'></hr>
+  </div>
   <div className="collapse-content">
   {allCategories.map(item=>{
         return <div key={item} className="form-control">
@@ -148,7 +153,7 @@ const Home = () => {
 </div>
          <div className="collapse bg-base-200 w-full">
          <input type="checkbox" />
-  <div className="collapse-title text-md font-medium">Price range</div>
+  <div className="collapse-title text-md font-medium">Price range     <hr className='w-full border-black'></hr></div>
   <div className="collapse-content">
   <input type="range" min={0} max="2500" onChange={setNewPriceRange} defaultValue={priceRange} className="range" />
   <div className='flex justify-between w-full'>

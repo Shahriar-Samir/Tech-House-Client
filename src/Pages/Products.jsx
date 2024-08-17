@@ -22,16 +22,20 @@ const Products = ({itemsCount,itemsPerPage,setCurrentPage,currentPage,items}) =>
                  <figure>
                    <img
                      src={item.image}
+                     className='w-full object-cover h-[250px]'
                      alt="Shoes" />
                  </figure>
-                 <div className="card-body">
-                   <h2 className="card-title">{item.name}</h2>
-                   <p>{item.brand}</p>
-                   <p>{item.category}</p>
-                   <p>{item.price}</p>
-                   <p>{item.createdAt}</p>
-                   <div className="card-actions justify-end">
-                     <button className="btn btn-primary">Buy Now</button>
+                 <div className="p-4 ">
+                   <h2 className="font-bold">{item.name}</h2>
+                   <div className='text-sm text-gray-400 flex flex-col gap-2 mt-3'>
+                   <p>{item.description}</p>
+                   <p>Brand: {item.brand}</p>
+                   <p>Category: {item.category}</p>
+                   <p>Rating: {item.rating}/5</p>
+                   <p className='text-center text-yellow-400 text-lg font-bold'>${item.price}</p>
+                   </div>
+                   <div className="card-actions justify-center mt-2">
+                     <button className="btn bg-[#4ADE80] hover:bg-[#3bb367] text-white">Buy Now</button>
                    </div>
                  </div>
                </div>
@@ -40,7 +44,7 @@ const Products = ({itemsCount,itemsPerPage,setCurrentPage,currentPage,items}) =>
              }
          </div>
     <div className="join flex justify-center flex-wrap">
-             <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />
+             <input className="join-item btn btn-square " type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />
              {
                  totalPages.map(btn=>{
                      const btnIndex = btn+1

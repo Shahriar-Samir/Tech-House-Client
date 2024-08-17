@@ -5,7 +5,7 @@ import { SearchContext } from "../Providers/SearchProvider";
 
 
 const Header = () => {
-    const {logOut} = useContext(AuthContext)
+    const {logOut,user} = useContext(AuthContext)
     const {searchValue} = useContext(SearchContext)
     
     const search = (e)=>{
@@ -47,22 +47,12 @@ const Header = () => {
   </svg>
 </label>
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-        </div>
+      <div tabIndex={0} role="button" className="btn ">
+        <h1>{user?.email? user?.email : 'loading...'}</h1>
       </div>
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
         <li onClick={logout}><a>Logout</a></li>
       </ul>
     </div>

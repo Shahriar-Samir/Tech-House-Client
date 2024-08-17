@@ -30,11 +30,11 @@ const Header = () => {
     return (
         <div className="navbar flex w-full justify-between py-4 bg-green-400">
   <div className="w-full">
-    <a className="text-2xl font-bold">Tech House</a>
+    <a className="text-3xl font-bold flex gap-3 items-center ms-5 text-white">Tech House <img src="/tech.png" className="w-[50px] object-cover"/></a>
   </div>
   <div className="flex gap-5 w-full justify-end">
-  <label className="input input-bordered flex items-center gap-2 w-full max-w-[500px]">
-  <input type="text" className="grow" placeholder="Search products" onKeyDown={search}/>
+  <label className="input input-bordered bg-transparent !border-gray-100 !outline-none text-white flex items-center gap-2 w-full max-w-[500px]">
+  <input type="text" className="grow placeholder:text-gray-100" placeholder="Search products" onKeyDown={search}/>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"

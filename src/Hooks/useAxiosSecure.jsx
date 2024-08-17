@@ -3,7 +3,7 @@ import axios from 'axios'
 import useAuth from './useAuth';
 
 const axioSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://tech-house-server.vercel.app',
     withCredentials: true
 })
 const useAxiosSecure = () => {

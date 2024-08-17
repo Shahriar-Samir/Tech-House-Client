@@ -1,22 +1,23 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import {toast} from 'react-toastify'
-import {useNavigate} from 'react-router-dom'
+import { SearchContext } from "../Providers/SearchProvider";
+
 
 const Header = () => {
     const {logOut} = useContext(AuthContext)
-    const navigate = useNavigate()
-
+    const {searchValue} = useContext(SearchContext)
+    
     const search = (e)=>{
-        if(e.key === "Enter"){
-        if(e.target.value !== ''){
-          navigate(`?search=${e.target.value}`)
-        }
-        if(!e.target.value){
-          navigate('/')
-        }
-        }
-    }
+      if(e.key === "Enter"){
+      if(e.target.value !== ''){
+          searchValue(e.target.value)
+      }
+      if(!e.target.value){
+        searchValue('null')
+      }
+      }
+  }
 
     const logout = ()=>{
       logOut()

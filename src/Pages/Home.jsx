@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Loading from '../Components/Loading';
 import Products from './Products';
 import { ToastContainer } from 'react-toastify';
-import { useLocation } from 'react-router-dom';
+
+import { SearchContext } from '../Providers/SearchProvider';
 
 
 const Home = () => {
-    const location = useLocation();
 
+    const {value} = useContext(SearchContext)
 
-    const queryParams = new URLSearchParams(location.search);
-    const value = queryParams.get('search');
-
+  
     const axiosSecure = useAxiosSecure()
 
     const [brands,setBrands] = useState([])
@@ -30,7 +29,6 @@ const Home = () => {
             setSortByPrice(e.target.value)
     }
 
-    console.log(sortByDate, sortByPrice)
 
     const allBrands = ["Apple","Dell","Logitech","Samsung","Sony","Corsair","NZXT","Blue Microphones","Herman Miller","Brother","ASUS","Bose","LG","Amazon","Canon","Microsoft","Fitbit","JBL","NVIDIA","Google","MSI","HyperX","SteelSeries","Noctua","Razer","Intel","AMD","Gigabyte"
       ]
@@ -77,6 +75,10 @@ const Home = () => {
     
     const itemsPerPage = 6
     const [currentPage,setCurrentPage] = useState(0)
+
+    useEffect(()=>{
+        setCurrentPage(0)
+    },[value])
 
     const {data:items,isFetching:loading1} = useQuery({
             queryKey: [currentPage,brands,categories,sortByDate,sortByPrice,value],
@@ -169,7 +171,17 @@ const Home = () => {
                 </select>
                 </label>
             </div>
-        {loading1 || loading2? <Loading/> : <Products itemsCount={itemsCount} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} items={items}></Products>
+        {loading1 || loading2? <Loading/> : items.length>0? 
+        <div>
+            <div className='w-full'>
+                {value === 'null'? '' : <p className='mt-3 mb-3 text-xl'>Search Results for: {`'${value}'`}</p>}
+            </div>
+            <Products itemsCount={itemsCount} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} items={items}></Products>
+        </div>
+        :
+        <div className='h-[60vh] w-full flex justify-center items-center'>
+        <p className='text-lg w-full max-w-[300px]'>No Products found for {`"${value}"`}</p>
+</div>
          }
         </div>
 

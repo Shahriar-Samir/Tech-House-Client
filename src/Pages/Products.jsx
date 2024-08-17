@@ -35,7 +35,9 @@ const Products = ({itemsCount,itemsPerPage,setCurrentPage,currentPage,items}) =>
                    </div>
                  </div>
                </div>
-             })}
+             })
+    
+             }
          </div>
     <div className="join">
              <input className="join-item btn btn-square" type="radio" name="options" aria-label="Pre" onClick={prePage} disabled={currentPage===0? true: false} />

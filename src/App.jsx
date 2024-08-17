@@ -7,20 +7,25 @@ import Footer from './Components/Footer';
 
 const App = () => {
     const location = useLocation()
-    if(location.pathname !== '/login' || location.pathname !== '/signup' ){
+    if(location.pathname ==='/'){
       return (
+        <div>
         <SearchProvider>
-          <div>
+          
           <Header/>
           <Outlet/>
           <Footer/>
-        </div>
         </SearchProvider>
+        </div>
       );
     }
-    return <div>
+   
+      return <div>
+        <SearchProvider>
               <Outlet/>
+              </SearchProvider>
           </div>
+    
 };
 
 export default App;

@@ -20,6 +20,7 @@ const Home = () => {
     const [categories,setCategories] = useState([])
     const [sortByDate,setSortByDate] = useState('default')
     const [sortByPrice,setSortByPrice] = useState('default')
+    const [priceRange,setPriceRange] = useState(2500)
 
 
     const handleSortByDate = (e)=>{
@@ -27,6 +28,10 @@ const Home = () => {
     }
     const handleSortByPrice = (e)=>{
             setSortByPrice(e.target.value)
+    }
+
+    const setNewPriceRange = (e)=>{
+        setPriceRange(e.target.value)
     }
 
 
@@ -81,19 +86,19 @@ const Home = () => {
     },[value])
 
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: [currentPage,brands,categories,sortByDate,sortByPrice,value],
+            queryKey: [currentPage,brands,categories,sortByDate,sortByPrice,value,priceRange],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&sortByPrice=${sortByPrice}&sortByDate=${sortByDate}&value=${value}`)
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&sortByPrice=${sortByPrice}&sortByDate=${sortByDate}&value=${value}&priceRange=${priceRange}`)
                 .then(res=>{
                     return res.data
                 })
     })
     const {data:itemsCount,isFetching:loading2} = useQuery({
-            queryKey: [brands,categories,value],
+            queryKey: [brands,categories,value,priceRange],
             initialData: {},
             queryFn: ()=>
-                axiosSecure.get(`/itemsCount?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&value=${value}`)
+                axiosSecure.get(`/itemsCount?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&value=${value}&priceRange=${priceRange}`)
                 .then(res=>{
                     return res.data
                 })
@@ -143,11 +148,11 @@ const Home = () => {
          <input type="checkbox" />
   <div className="collapse-title text-md font-medium">Price range</div>
   <div className="collapse-content">
-  <input type="range" min={0} max="100" onChange={(e)=> console.log(e.target.value)} defaultValue={30} className="range" />
+  <input type="range" min={0} max="2500" onChange={setNewPriceRange} defaultValue={priceRange} className="range" />
   <div className='flex justify-between w-full'>
-        <h1>0</h1>
-
-        <h1>12</h1>
+        <h1>$0</h1>
+        <h1>${priceRange}</h1>
+        <h1>$2500</h1>
   </div>
   </div>
 </div>
@@ -166,7 +171,7 @@ const Home = () => {
                 Sort By Date:
                 <select name='sortByDate' onChange={handleSortByDate} className='bg-slate-200 rounded-lg p-2'>
                     <option value='default'>Default</option>
-                    <option value='newest'>Newest</option>
+                    <option value='latest'>Newest</option>
                     <option value='oldest'>Oldest</option>
                 </select>
                 </label>
@@ -180,7 +185,12 @@ const Home = () => {
         </div>
         :
         <div className='h-[60vh] w-full flex justify-center items-center'>
+        {value==='null'?
+        <p className='text-lg w-full max-w-[300px]'>No Products found</p>
+        :
         <p className='text-lg w-full max-w-[300px]'>No Products found for {`"${value}"`}</p>
+
+    }
 </div>
          }
         </div>

@@ -1,9 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 import {toast} from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
 
 const Header = () => {
     const {logOut} = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const search = (e)=>{
+        if(e.key === "Enter"){
+        if(e.target.value !== ''){
+          navigate(`?search=${e.target.value}`)
+        }
+        if(!e.target.value){
+          navigate('/')
+        }
+        }
+    }
 
     const logout = ()=>{
       logOut()
@@ -20,7 +33,7 @@ const Header = () => {
   </div>
   <div className="flex gap-5 w-full justify-end">
   <label className="input input-bordered flex items-center gap-2 w-full max-w-[500px]">
-  <input type="text" className="grow" placeholder="Search products" />
+  <input type="text" className="grow" placeholder="Search products" onKeyDown={search}/>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"

@@ -12,7 +12,6 @@ import AuthRoute from './Routes/AuthRoute.jsx'
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {HelmetProvider} from 'react-helmet-async'
 import AuthProvider from './Providers/AuthProvider.jsx'
-import Search from './Pages/Search.jsx'
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([{
@@ -27,10 +26,6 @@ const router = createBrowserRouter([{
         {
           path:'/signup',
           element:<AuthRoute><Signup/></AuthRoute>
-        },
-        {
-          path:'/search/:value',
-          element:<AuthRoute><Search/></AuthRoute>
         },
         {
           path:'/',

@@ -5,9 +5,15 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Loading from '../Components/Loading';
 import Products from './Products';
 import { ToastContainer } from 'react-toastify';
+import { useLocation } from 'react-router-dom';
 
 
 const Home = () => {
+    const location = useLocation();
+
+
+    const queryParams = new URLSearchParams(location.search);
+    const value = queryParams.get('search');
 
     const axiosSecure = useAxiosSecure()
 
@@ -73,26 +79,26 @@ const Home = () => {
     const [currentPage,setCurrentPage] = useState(0)
 
     const {data:items,isFetching:loading1} = useQuery({
-            queryKey: [currentPage,brands,categories,sortByDate,sortByPrice],
+            queryKey: [currentPage,brands,categories,sortByDate,sortByPrice,value],
             initialData: [],
             queryFn: ()=>
-                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&sortByPrice=${sortByPrice}&sortByDate=${sortByDate}`)
+                axiosSecure.get(`/products?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&sortByPrice=${sortByPrice}&sortByDate=${sortByDate}&value=${value}`)
                 .then(res=>{
                     return res.data
                 })
     })
     const {data:itemsCount,isFetching:loading2} = useQuery({
-            queryKey: [brands,categories],
+            queryKey: [brands,categories,value],
             initialData: {},
             queryFn: ()=>
-                axiosSecure.get(`/itemsCount?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}`)
+                axiosSecure.get(`/itemsCount?pages=${itemsPerPage}&count=${currentPage}&brands=${brands}&categories=${categories}&value=${value}`)
                 .then(res=>{
                     return res.data
                 })
     })
 
+    
   
-       
 
     return (
         <div className='mt-10'>

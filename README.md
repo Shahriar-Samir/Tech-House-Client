@@ -7,6 +7,7 @@ Key features of this website
 - Users can see product items with pagination.
 - Users can filter items according to price range, brands, categories.
 - Users can sort items by price and creation date.
+<<<<<<< HEAD
 - Users can search product items according to their names.
 
 
@@ -17,3 +18,7 @@ If you want to test it on your local machine
 - After finishing all repos clone to the project directory and open the terminal.
 - In your both client and server terminals write 'npm i' for installing dependencies.
 - At last, give the command 'npm start' to the server side integrated terminal. Then you have to give the command 'npm run dev' in the client side terminal and go to the link 'http://localhost:5173', then you should see this web project running on your local machine.
+=======
+- Users can search product items according to their names. After writing what you need search in search bar hit enter. It will show results.
+  - For log in password has to be at least 6 chars'
+>>>>>>> d7a552f907794b4b4f9dbf7e55c7fc8c9f6da70a

@@ -3,9 +3,10 @@ import { AuthContext } from '../Providers/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
-    const {signIn,googleSignIn,setLoading} = useContext(AuthContext)
+    const {signIn,googleSignIn} = useContext(AuthContext)
     const navigate = useNavigate()
 
     const submitHandler = (e)=>{
@@ -13,10 +14,18 @@ const Login = () => {
             const form = e.target
             const email = form.email.value
             const password = form.password.value
-            signIn(email,password)
+            if(password.length<6){
+              toast.error('Password should contain at least six characters')
+            }
+            else{
+              signIn(email,password)
             .then(res=>{
                 navigate('/')
             })
+            .catch(()=>{
+              toast.error('Your given email or password is wrong!')
+            })
+            }
             
     }
     const googleSigninHandler = ()=>{
@@ -27,6 +36,7 @@ const Login = () => {
 
     return (
         <div className='w-full h-[100vh] flex justify-center items-center flex-col bg-green-300'>
+          <ToastContainer/>
              <Helmet>
                 <title>Tech House || Login</title>
             </Helmet>

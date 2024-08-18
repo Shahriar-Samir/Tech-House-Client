@@ -176,7 +176,7 @@ const Home = () => {
                <select name='sortByPrice' onChange={handleSortByPrice} className='bg-[#F2F2F2] rounded-lg p-2 w-full md:max-w-[250px]'>
                     <option value='default'>Default</option>
                     <option value='low'>Price {'(Low > High)'}</option>
-                    <option value='high'>Price {'High > Low'}</option>
+                    <option value='high'>Price {'(High > Low)'}</option>
                 </select>
                </label>
                 <label className='flex flex-col'>

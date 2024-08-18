@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Signup = () => {
     const {signUp,googleSignIn} = useContext(AuthContext)
@@ -18,15 +19,23 @@ const Signup = () => {
             const form = e.target
             const email = form.email.value
             const password = form.password.value
-            signUp(email,password)
+            if(password.length<6){
+                toast.error('Password should contain at least six characters')
+            }
+            else{
+              signUp(email,password)
             .then(res=>{
                 
             })
-            
+            .catch(()=>{
+              toast.error('Something went wrong!')
+            })
+            }
     }
 
     return (
         <div className='w-full h-[100vh] flex justify-center items-center flex-col bg-green-300'>
+          <ToastContainer/>
              <Helmet>
                 <title>Tech House || Signup</title>
             </Helmet>

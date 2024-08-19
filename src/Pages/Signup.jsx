@@ -49,7 +49,7 @@ const Signup = () => {
              <div className='w-11/12 max-w-[400px] '>
                 <h1 className='text-center font-bold text-lg mt-4'>Create a Account</h1>
              <form className="card-body p-2" onSubmit={submitHandler}>
-             <h1 className='text-center font-semibold underline' onClick={googleSigninHandler}>Signin with Google</h1>
+             <h1 className='text-center font-semibold underline cursor-pointer' onClick={googleSigninHandler}>Signin with Google</h1>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>

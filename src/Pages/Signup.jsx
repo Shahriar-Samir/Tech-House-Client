@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Signup = () => {
-    const {signUp,googleSignIn} = useContext(AuthContext)
+    const {signUp,googleSignIn,setLoading} = useContext(AuthContext)
 
     const googleSigninHandler = ()=>{
       googleSignIn()
@@ -28,7 +28,8 @@ const Signup = () => {
                 
             })
             .catch(()=>{
-              toast.error('Something went wrong!')
+              setLoading(false)
+              toast.error('You provided email is already in use')
             })
             }
     }

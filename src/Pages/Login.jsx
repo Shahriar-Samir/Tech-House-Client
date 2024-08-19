@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
-    const {signIn,googleSignIn} = useContext(AuthContext)
+    const {signIn,googleSignIn,setLoading} = useContext(AuthContext)
     const navigate = useNavigate()
 
     const submitHandler = (e)=>{
@@ -23,6 +23,7 @@ const Login = () => {
                 navigate('/')
             })
             .catch(()=>{
+              setLoading(false)
               toast.error('Your given email or password is wrong!')
             })
             }

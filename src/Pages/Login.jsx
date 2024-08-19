@@ -32,6 +32,10 @@ const Login = () => {
     const googleSigninHandler = ()=>{
         googleSignIn()
         .then(res=>{
+          setLoading(false)
+        })
+        .catch(()=>{
+          setLoading(false)
         })
     }
 
